@@ -131,8 +131,22 @@ export default function Home() {
     return (
         <div className="max-w-3xl mx-auto p-6 bg-white dark:bg-gray-900 rounded-lg shadow-md">
             <h1 className="text-2xl font-bold mb-4 text-center text-gray-900 dark:text-gray-100">
-                Random Sentence Generator
+                Kingdom Hearts Lore Generator
             </h1>
+
+            <div className="font-medium text-gray-900 dark:text-gray-200">
+                <p>Generate a random ENTIRELY TRUE Kingdom Hearts lore fact! Guaranteed to get clicks on Twitter!</p>
+                <p>
+                    Inspired by{" "}
+                    <a
+                        className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                        href=" https://bsky.app/profile/aid1043.bsky.social/post/3llzzsp6q2s2d"
+                    >
+                        Aid1043
+                    </a>
+                    .
+                </p>
+            </div>
 
             <div className="mb-6 p-4 bg-gray-100 dark:bg-gray-800 rounded">
                 {(cyclingParts.length > 0 || selectedParts.length > 0) && (
