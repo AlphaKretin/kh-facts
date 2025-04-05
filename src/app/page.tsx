@@ -68,7 +68,7 @@ const parts = [
         "the beta version of",
         "the official Japanese website for",
         "an obscure Nomura interview about",
-        "a Square Enic investor report about",
+        "a Square Enix investor report about",
         "the French localization of",
     ],
     [
@@ -88,7 +88,7 @@ const parts = [
         "the plot of Kingdom Hearts IV",
         "Vanitas's true origin",
         "what's in the black box",
-        "the identity of the voice in the KH1 totiral",
+        "the identity of the voice in the KH1 tutorial",
         "why Roxas can dual-wield",
         "why Xehanort is bald",
         "why King Triton recognized the Keyblade in KH1",
