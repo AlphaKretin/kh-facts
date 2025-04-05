@@ -135,7 +135,7 @@ export default function Home() {
             </h1>
 
             <div className="font-medium text-gray-900 dark:text-gray-200">
-                <p>Generate a random ENTIRELY TRUE Kingdom Hearts lore fact! Guaranteed to get clicks on Twitter!</p>
+                <p>Generate a random ENTIRELY TRUE* Kingdom Hearts lore fact! Guaranteed to get clicks on Twitter!</p>
                 <p>
                     Inspired by{" "}
                     <a
