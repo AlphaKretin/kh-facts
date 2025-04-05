@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import StaticFragment from "./components/StaticFragment";
+import VariableFragment from "./components/VariableFragment";
 
 // Define your sentence fragments here
 const parts = [
@@ -26,17 +28,34 @@ export default function Home() {
     };
 
     return (
-        <div className="max-w-md mx-auto p-6 bg-white dark:bg-gray-900 rounded-lg shadow-md">
+        <div className="max-w-3xl mx-auto p-6 bg-white dark:bg-gray-900 rounded-lg shadow-md">
             <h1 className="text-2xl font-bold mb-4 text-center text-gray-900 dark:text-gray-100">
                 Random Sentence Generator
             </h1>
 
             <div className="mb-6 p-4 bg-gray-100 dark:bg-gray-800 rounded">
-                <p className="text-lg font-medium text-gray-900 dark:text-gray-200">
-                    {selectedParts.length > 0
-                        ? `Did you know that ${selectedParts[0]} is actually ${selectedParts[1]} ${selectedParts[2]}? It was originally revealed in ${selectedParts[3]} ${selectedParts[4]} but it actually has profound implications for ${selectedParts[5]}.`
-                        : "Your sentence will appear here..."}
-                </p>
+                {selectedParts.length > 0 && (
+                    <p className="text-lg font-medium text-gray-900 dark:text-gray-200">
+                        <StaticFragment>Did you know that </StaticFragment>
+                        <VariableFragment>{selectedParts[0]}</VariableFragment>
+                        <StaticFragment> is actually </StaticFragment>
+                        <VariableFragment>{selectedParts[1]}</VariableFragment>
+                        <StaticFragment> </StaticFragment>
+                        <VariableFragment>{selectedParts[2]}</VariableFragment>
+                        <StaticFragment>
+                            ?<br />
+                        </StaticFragment>
+                        <StaticFragment>It was originally revealed in </StaticFragment>
+                        <VariableFragment>{selectedParts[3]} </VariableFragment>
+                        <VariableFragment>{selectedParts[4]}</VariableFragment>
+
+                        <StaticFragment>
+                            ,<br /> but it actually has profound implications for
+                        </StaticFragment>
+                        <VariableFragment> {selectedParts[5]}</VariableFragment>
+                        <StaticFragment>.</StaticFragment>
+                    </p>
+                )}
             </div>
 
             <button
