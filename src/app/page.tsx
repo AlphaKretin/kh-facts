@@ -6,25 +6,126 @@ import VariableFragment from "./components/VariableFragment";
 
 // Define your sentence fragments here
 const parts = [
-    ["Roxas", "Xion"],
-    ["the Nobody form of", "the human form of"],
-    ["Sora", "Riku", "Kairi"],
-    ["the secret ending of", "the Ultimania for"],
-    ["Kingdom Hearts II Final Mix", "Birth By Sleep"],
-    ["the plot of Kingdom Hearts IV", "Vanitas's true origin"],
+    [
+        "Roxas",
+        "Xion",
+        "Ventus",
+        "Vanitas",
+        "Yen Sid",
+        "Mickey",
+        "Ava",
+        "The Master of Masters",
+        "Yozora",
+        "The Nameless Star",
+        "Subject X",
+        '"Player"',
+        "Yuffie",
+        "Sigurd",
+        "Sigrun",
+        "Chernabog",
+        "Your favorite Organization member",
+        "That one unnamed Agrabah NPC",
+        "Tetsuya Nomura",
+        "the Nameless Star",
+        "the Master of Masters",
+    ],
+    [
+        "the Nobody form of",
+        "the human form of",
+        "a vessel for",
+        "a disguise used by",
+        "the future version of",
+        "an ancestor of",
+        "the long-lost sibling of",
+        "the sworn enemy of",
+        "in a scandalous relationship with",
+    ],
+    [
+        "Sora",
+        "Riku",
+        "Kairi",
+        "Aqua",
+        "Terra",
+        "Luxu",
+        "Xehanort",
+        "Skuld",
+        "Riku Replica",
+        "True Darkness",
+        "Marluxia's Specter",
+        "Caw",
+        "a Peepsta Hoo",
+        "the Organization Moogle",
+        "the Traverse Town lady",
+        "Aya Brea from Parasite Eve",
+        "Takeharu Ishimoto",
+    ],
+    [
+        "the secret ending of",
+        "the Ultimania for",
+        "the manga adapation of",
+        "the novelization of",
+        "an unused cutscene in the files of",
+        "the beta version of",
+        "the official Japanese website for",
+        "an obscure Nomura interview about",
+        "a Square Enic investor report about",
+        "the French localization of",
+    ],
+    [
+        "Kingdom Hearts II Final Mix",
+        "Birth By Sleep",
+        "Dream Drop Distance",
+        "Kingdom Hearts III Re Mind",
+        "the original Kingdom Hearts coded",
+        "Quest 978 of Union χ",
+        "the Mission Mode of 358/2 Days",
+        "a Kingdom Hearts Mobile mini-game",
+        "Kingdom Hearts for V CAST",
+        "the Second Breath orchestra concert",
+        "the Kingdom Hearts Tamagotchi",
+    ],
+    [
+        "the plot of Kingdom Hearts IV",
+        "Vanitas's true origin",
+        "what's in the black box",
+        "the identity of the voice in the KH1 totiral",
+        "why Roxas can dual-wield",
+        "why Xehanort is bald",
+        "why King Triton recognized the Keyblade in KH1",
+        "why Final Mix Heartless have different colors",
+        "the release date of Missing-Link",
+    ],
 ];
 
 export default function Home() {
     const [selectedParts, setSelectedParts] = useState<string[]>([]);
+    const [cyclingParts, setCyclingParts] = useState<string[]>([]);
 
     const generateRandomSentence = () => {
-        const newParts = parts.map((part) => {
-            const randomIndex = Math.floor(Math.random() * part.length);
-            const fragment = part[randomIndex];
-            return fragment;
-        });
+        const newParts: string[] = [];
+        const cycles: string[] = Array(parts.length).fill("");
 
-        setSelectedParts(newParts);
+        // Start cycling through options
+        parts.forEach((part, index) => {
+            let cycleIndex = 0;
+
+            const interval = setInterval(() => {
+                cycles[index] = part[cycleIndex];
+                setCyclingParts([...cycles]);
+                cycleIndex = (cycleIndex + 1) % part.length;
+            }, 100); // Change every 100ms
+
+            // Stop cycling after a random delay and select the final option
+            setTimeout(() => {
+                clearInterval(interval);
+                const randomIndex = Math.floor(Math.random() * part.length);
+                newParts[index] = part[randomIndex];
+                setCyclingParts([...cycles]); // Ensure the last cycle is shown
+                if (newParts.length === parts.length) {
+                    setSelectedParts(newParts);
+                }
+            }, 1000 + index * 200); // Stagger the stop times for each part
+        });
     };
 
     return (
@@ -34,25 +135,25 @@ export default function Home() {
             </h1>
 
             <div className="mb-6 p-4 bg-gray-100 dark:bg-gray-800 rounded">
-                {selectedParts.length > 0 && (
+                {(cyclingParts.length > 0 || selectedParts.length > 0) && (
                     <p className="text-lg font-medium text-gray-900 dark:text-gray-200">
                         <StaticFragment>Did you know that </StaticFragment>
-                        <VariableFragment>{selectedParts[0]}</VariableFragment>
+                        <VariableFragment>{cyclingParts[0] || selectedParts[0]}</VariableFragment>
                         <StaticFragment> is actually </StaticFragment>
-                        <VariableFragment>{selectedParts[1]}</VariableFragment>
+                        <VariableFragment>{cyclingParts[1] || selectedParts[1]}</VariableFragment>
                         <StaticFragment> </StaticFragment>
-                        <VariableFragment>{selectedParts[2]}</VariableFragment>
+                        <VariableFragment>{cyclingParts[2] || selectedParts[2]}</VariableFragment>
                         <StaticFragment>
                             ?<br />
                         </StaticFragment>
                         <StaticFragment>It was originally revealed in </StaticFragment>
-                        <VariableFragment>{selectedParts[3]} </VariableFragment>
-                        <VariableFragment>{selectedParts[4]}</VariableFragment>
+                        <VariableFragment>{cyclingParts[3] || selectedParts[3]} </VariableFragment>
+                        <VariableFragment>{cyclingParts[4] || selectedParts[4]}</VariableFragment>
 
                         <StaticFragment>
-                            ,<br /> but it actually has profound implications for
+                            ,<br /> but it actually has profound implications for {""}
                         </StaticFragment>
-                        <VariableFragment> {selectedParts[5]}</VariableFragment>
+                        <VariableFragment>{cyclingParts[5] || selectedParts[5]}</VariableFragment>
                         <StaticFragment>.</StaticFragment>
                     </p>
                 )}
