@@ -102,7 +102,7 @@ export default function Home() {
     const [cyclingParts, setCyclingParts] = useState<string[]>([]);
 
     const generateRandomSentence = () => {
-        const newParts: string[] = [];
+        const newParts: string[] = Array(parts.length).fill("");
         const cycles: string[] = Array(parts.length).fill("");
 
         // Start cycling through options
@@ -120,7 +120,7 @@ export default function Home() {
                 clearInterval(interval);
                 const randomIndex = Math.floor(Math.random() * part.length);
                 newParts[index] = part[randomIndex];
-                setCyclingParts([...cycles]); // Ensure the last cycle is shown
+                setCyclingParts([]); // Ensure the last cycle is shown
                 if (newParts.length === parts.length) {
                     setSelectedParts(newParts);
                 }
@@ -177,7 +177,7 @@ export default function Home() {
                 onClick={generateRandomSentence}
                 className="w-full py-2 px-4 font-medium rounded transition-colors bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white"
             >
-                Generate Sentence
+                Generate Fact
             </button>
         </div>
     );
